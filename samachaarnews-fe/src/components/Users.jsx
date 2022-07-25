@@ -29,7 +29,7 @@ export default function Users() {
             <button
               onClick={() => {
                 setName(user.name);
-                navigate("/articles");
+                navigate("/topics");
               }}
             >
               Select user

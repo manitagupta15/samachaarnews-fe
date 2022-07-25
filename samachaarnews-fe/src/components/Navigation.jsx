@@ -7,12 +7,11 @@ export default function Navigation() {
 
   return (
     <div>
-      <h2>Welcome {name}</h2>
-      <hr />
+      <h4>Welcome {name}</h4>
       <nav className="nav-bar">
-        <Link to="/">Change User</Link>
-        <Link to="/articles">Articles</Link>
-        {/* <Link to="/topics">Topics</Link> */}
+        <Link to="/">👤Change User</Link>
+        {/* <Link to="/articles">Articles</Link> */}
+        <Link to="/topics">Topics</Link>
       </nav>
     </div>
   );
