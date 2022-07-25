@@ -8,3 +8,12 @@ exports.fetchUsers = () => {
     return users;
   });
 };
+
+exports.fetchArticles = () => {
+  const path = axios.create({
+    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
+  });
+  return path.get("/articles").then(({ data: { articles } }) => {
+    return articles;
+  });
+};

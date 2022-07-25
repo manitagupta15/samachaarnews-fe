@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchUsers } from "../api";
+import { userNameContext } from "../Context/context";
 
-export default function Users({ username, setUsername }) {
+export default function Users() {
+  const { setName } = useContext(userNameContext);
   const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
@@ -26,7 +28,7 @@ export default function Users({ username, setUsername }) {
             <img src={user.avatar_url} alt="your avatar"></img>
             <button
               onClick={() => {
-                setUsername(user.name);
+                setName(user.name);
                 navigate("/articles");
               }}
             >

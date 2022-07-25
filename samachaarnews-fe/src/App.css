@@ -1,5 +1,8 @@
 body {
   background-color: orange;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  font-size: 1rem;
 }
 header {
   color: red;
@@ -11,4 +14,16 @@ header {
 
 img {
   width: 10rem;
+}
+
+.nav-bar {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 25px;
+  margin: 8px;
+}
+
+h2 {
+  color: blue;
 }
