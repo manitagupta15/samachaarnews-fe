@@ -7,11 +7,10 @@ import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Users from "./components/Users";
 
-
 import { useState } from "react";
 
 function App() {
-  const [username, setUsername] = useState("grumpy19");
+  const [username, setUsername] = useState("Paul Grump");
 
   return (
     <BrowserRouter>
