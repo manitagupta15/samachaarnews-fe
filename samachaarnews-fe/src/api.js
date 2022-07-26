@@ -44,6 +44,7 @@ exports.patchArticleVotes = (article_id, vote) => {
   return path
     .patch(`/articles/${article_id}`, input)
     .then(({ data: { article } }) => {
+      console.log(article.votes);
       return article;
     });
 };
