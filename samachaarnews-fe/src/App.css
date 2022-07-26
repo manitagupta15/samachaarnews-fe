@@ -1,8 +1,8 @@
 body {
-  background-color: orange;
+  background-color: rgb(249, 177, 100);
   margin-left: 2rem;
   margin-right: 2rem;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 header {
   color: red;
@@ -17,13 +17,56 @@ img {
 }
 
 .nav-bar {
-  background-color: aquamarine;
+  background-color: rgb(46, 206, 153);
   display: flex;
   justify-content: space-evenly;
   padding: 25px;
   margin: 8px;
 }
+h4 {
+  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
+}
 
 h2 {
   color: blue;
+}
+
+.description-body,
+.comment-count {
+  border-style: solid;
+  padding: 0.5rem;
+  background-color: yellow;
+  text-align: justify;
+}
+
+hr {
+  background-color: green;
+  border-color: green;
+  width: 100%;
+  height: 0.25rem;
+}
+.title {
+  color: rgb(79, 11, 142);
+}
+
+.topic-button,
+.user {
+  width: 12rem;
+  margin: 1rem;
+  height: 3rem;
+  font-size: 26px;
+  color: rgb(38, 57, 19);
+  border-radius: 50px;
+  background-color: aquamarine;
+}
+
+.footer-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+}
+.topic {
+  color: blueviolet;
 }

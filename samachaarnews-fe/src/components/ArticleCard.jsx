@@ -2,11 +2,16 @@ export default function ArticleCard({ article }) {
   return (
     <div>
       <article>
-        <hr />
         <h3>Topic: {article.topic}</h3>
-        <p>Title: {article.title}</p>
-        <p>Comment_count: {article.comment_count}</p>
-        <p>Body: {article.body}</p>
+        <p>
+          Title: <span className="title">{article.title}</span>
+        </p>
+        <p>
+          Comment_count:
+          <span className="comment-count">{article.comment_count}</span>
+        </p>
+        {/* <p className="description-body">Body: {article.body}</p> */}
+        <hr />
       </article>
     </div>
   );

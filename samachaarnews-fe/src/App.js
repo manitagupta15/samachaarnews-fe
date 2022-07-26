@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Users from "./components/Users";
-import ArticlesList from "./components/ArticlesList";
+import Articles from "./components/Articles";
+import Footer from "./components/Footer";
 
 import { useState } from "react";
 
@@ -20,14 +21,16 @@ function App() {
         <div className="App">
           <Header />
           <Navigation />
-
           <Routes>
             <Route
               path="/"
               element={<Users username={username} setUsername={setUsername} />}
             />
-            <Route path="/articles" element={<ArticlesList />} />
-          </Routes>
+            <Route path="/articles" element={<Articles />} />
+            {/* <Route path="/topics" element={<Topics />} /> */}
+            <Route path="/articles/:topic" element={<Articles />} />
+          </Routes>{" "}
+          <Footer />
         </div>
       </userNameContext.Provider>
     </BrowserRouter>

@@ -24,9 +24,11 @@ export default function Users() {
       {users.map((user) => {
         return (
           <article key={user.name}>
-            <p>Name: {user.name}</p>
-            <img src={user.avatar_url} alt="your avatar"></img>
+            <p>{user.name}</p>
+            <img src={user.avatar_url} alt="your avatar" />
+            <br></br>
             <button
+              className="user"
               onClick={() => {
                 setName(user.name);
                 navigate("/articles");
