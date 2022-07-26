@@ -7,10 +7,10 @@ export default function ArticleCard({ article }) {
           Title: <span className="title">{article.title}</span>
         </p>
         <p>
-          Comment_count:{" "}
+          Comment_count:
           <span className="comment-count">{article.comment_count}</span>
         </p>
-        <p className="description-body">Body: {article.body}</p>
+        {/* <p className="description-body">Body: {article.body}</p> */}
         <hr />
       </article>
     </div>
