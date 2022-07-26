@@ -51,7 +51,8 @@ hr {
 }
 
 .topic-button,
-.user {
+.user,
+button {
   width: 12rem;
   margin: 1rem;
   height: 3rem;
@@ -69,4 +70,21 @@ hr {
 }
 .topic {
   color: blueviolet;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.article-body {
+  border-style: double;
+  border-color: red;
+  border-width: 0.5rem;
+  padding: 2rem;
+  font-size: 25px;
+  text-align: justify;
+}
+label {
+  padding: 0.25rem;
+  margin: 0.25rem;
 }
