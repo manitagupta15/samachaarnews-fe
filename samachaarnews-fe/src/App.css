@@ -50,7 +50,8 @@ hr {
   color: rgb(79, 11, 142);
 }
 
-.topic-button {
+.topic-button,
+.user {
   width: 12rem;
   margin: 1rem;
   height: 3rem;
