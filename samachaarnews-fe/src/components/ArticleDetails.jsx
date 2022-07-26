@@ -12,7 +12,7 @@ export default function ArticleDetails() {
   const [count, setCount] = useState(0);
   const [error, setError] = useState(null);
   const [isPlusChecked, setIsPlusChecked] = useState(false);
-  // const [isMinusChecked, setIsMinusChecked] = useState(false);
+  const [buttonText, setButtonText] = useState("+");
 
   useEffect(() => {
     fetchArticleById(article_id).then((article) => {
@@ -48,36 +48,18 @@ export default function ArticleDetails() {
             setCount(1);
             setVotes((article.votes += 1));
             setIsPlusChecked(true);
-            //  setIsMinusChecked(true);
+            setButtonText("-");
           } else {
             setCount(-1);
             setVotes((article.votes -= 1));
             setIsPlusChecked(false);
-            //  setIsMinusChecked(false);
+            setButtonText("+");
           }
         }}
       >
-        +
+        {buttonText}
       </button>
       <span className="comment-count">{article.votes}</span>
-      {/* 
-      <button
-        className="votes"
-        onClick={() => {
-          if (!isMinusChecked) {
-            setCount(-1);
-            setVotes((article.votes -= 1));
-            setIsMinusChecked(true);
-            //setIsMinusChecked(false);
-          } else {
-            setCount(1);
-            setVotes((article.votes += 1));
-            setIsMinusChecked(false);
-          }
-        }}
-      >
-        -
-      </button> */}
       <br />
       <button
         onClick={() => {
