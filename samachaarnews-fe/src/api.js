@@ -47,3 +47,14 @@ exports.patchArticleVotes = (article_id, vote) => {
       return article;
     });
 };
+
+exports.fetchComments = (article_id) => {
+  const path = axios.create({
+    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
+  });
+  return path
+    .get(`/articles/${article_id}/comments`)
+    .then(({ data: { comments } }) => {
+      return comments;
+    });
+};

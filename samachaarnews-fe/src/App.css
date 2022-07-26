@@ -3,6 +3,7 @@ body {
   margin-left: 2rem;
   margin-right: 2rem;
   font-size: 1.25rem;
+  margin-bottom: 2rem;
 }
 header {
   color: red;
@@ -35,9 +36,11 @@ h2 {
 .description-body,
 .comment-count {
   border-style: solid;
-  padding: 0.5rem;
+  padding: 0.25rem;
   background-color: yellow;
   text-align: justify;
+  margin: 0.25rem;
+  height: 1.25rem;
 }
 
 hr {
@@ -61,10 +64,13 @@ button {
   border-radius: 50px;
   background-color: aquamarine;
 }
-
+.back {
+  width: 8rem;
+  font-size: 22px;
+}
 .footer-top {
   position: fixed;
-  bottom: 1rem;
+  bottom: 0.5rem;
   right: 1rem;
   font-size: 1.5rem;
 }
@@ -91,4 +97,17 @@ label {
 
 .votes {
   width: 2.5rem;
+}
+
+.comment {
+  border-style: solid;
+  margin: 0.25rem;
+  text-align: justify;
+  padding: 0.25rem;
+}
+
+.vote-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -12,7 +12,6 @@ export default function ArticleCard({ article }) {
           Comment_count:
           <span className="comment-count">{article.comment_count}</span>
         </p>
-        {/* <p> articleId: {article.article_id}</p> */}
         <Link to={`/articles/articleId/${article.article_id}`}>
           <button>View Article</button>
         </Link>

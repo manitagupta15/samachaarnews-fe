@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { fetchArticleById, patchArticleVotes } from "../api";
+import { fetchArticleById, patchArticleVotes, fetchComments } from "../api";
 
 export default function ArticleDetails() {
   const { article_id } = useParams();
@@ -13,10 +13,15 @@ export default function ArticleDetails() {
   const [error, setError] = useState(null);
   const [isPlusChecked, setIsPlusChecked] = useState(false);
   const [buttonText, setButtonText] = useState("👍");
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetchArticleById(article_id).then((article) => {
       setArticle(article);
+    });
+
+    fetchComments(article_id).then((comments) => {
+      setComments(comments);
     });
   }, [article_id]);
 
@@ -36,38 +41,55 @@ export default function ArticleDetails() {
       <p>Article Id: {article.article_id}</p>
       <h2>{article.title}</h2>
       <p className="article-body">{article.body}</p>
-      <label>Comment_count: </label>
-      <span className="comment-count">{article.comment_count}</span>
 
-      <br></br>
-      <label>Votes: </label>
-      <button
-        className="votes"
-        onClick={() => {
-          if (!isPlusChecked) {
-            setCount(1);
-            setVotes((article.votes += 1));
-            setIsPlusChecked(true);
-            setButtonText("👎");
-          } else {
-            setCount(-1);
-            setVotes((article.votes -= 1));
-            setIsPlusChecked(false);
-            setButtonText("👍");
-          }
-        }}
-      >
-        {buttonText}
-      </button>
-      <span className="comment-count">{article.votes}</span>
+      <section className="vote-position">
+        <button
+          className="back"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </button>
+
+        <div>
+          <label>Comments: </label>
+          <span className="comment-count">{article.comment_count}</span>
+        </div>
+
+        <div>
+          {/* <label>Votes: </label>{" "} */}
+          <button
+            className="votes"
+            onClick={() => {
+              if (!isPlusChecked) {
+                setCount(1);
+                setVotes((article.votes += 1));
+                setIsPlusChecked(true);
+                setButtonText("👎");
+              } else {
+                setCount(-1);
+                setVotes((article.votes -= 1));
+                setIsPlusChecked(false);
+                setButtonText("👍");
+              }
+            }}
+          >
+            {buttonText}
+          </button>{" "}
+          <span className="comment-count">{article.votes}</span>
+        </div>
+      </section>
+
       <br />
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Go Back
-      </button>
+      {comments.map((comment) => {
+        return (
+          <section className="comment" key={comment.comment_id}>
+            <p>{comment.body}</p>
+            <p>-by {comment.author}</p>
+          </section>
+        );
+      })}
     </div>
   );
 }
