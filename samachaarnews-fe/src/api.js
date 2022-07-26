@@ -26,3 +26,12 @@ exports.fetchArticlesByTopic = (topic) => {
     return articles;
   });
 };
+
+exports.fetchArticleById = (article_id) => {
+  const path = axios.create({
+    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
+  });
+  return path.get(`/articles/${article_id}`).then(({ data: { article } }) => {
+    return article;
+  });
+};

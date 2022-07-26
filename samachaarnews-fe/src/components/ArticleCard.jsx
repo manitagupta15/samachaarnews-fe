@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ArticleCard({ article }) {
   return (
     <div>
@@ -10,7 +12,11 @@ export default function ArticleCard({ article }) {
           Comment_count:
           <span className="comment-count">{article.comment_count}</span>
         </p>
-        {/* <p className="description-body">Body: {article.body}</p> */}
+        {/* <p> articleId: {article.article_id}</p> */}
+        <Link to={`/articles/articleId/${article.article_id}`}>
+          <button>View Article</button>
+        </Link>
+
         <hr />
       </article>
     </div>
