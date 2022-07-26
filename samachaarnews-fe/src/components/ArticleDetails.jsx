@@ -12,7 +12,7 @@ export default function ArticleDetails() {
   const [count, setCount] = useState(0);
   const [error, setError] = useState(null);
   const [isPlusChecked, setIsPlusChecked] = useState(false);
-  const [buttonText, setButtonText] = useState("+");
+  const [buttonText, setButtonText] = useState("👍");
 
   useEffect(() => {
     fetchArticleById(article_id).then((article) => {
@@ -48,12 +48,12 @@ export default function ArticleDetails() {
             setCount(1);
             setVotes((article.votes += 1));
             setIsPlusChecked(true);
-            setButtonText("-");
+            setButtonText("👎");
           } else {
             setCount(-1);
             setVotes((article.votes -= 1));
             setIsPlusChecked(false);
-            setButtonText("+");
+            setButtonText("👍");
           }
         }}
       >
