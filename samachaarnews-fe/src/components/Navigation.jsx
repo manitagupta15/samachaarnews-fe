@@ -11,7 +11,7 @@ export default function Navigation() {
       <nav className="nav-bar">
         <Link to="/">👤Change User</Link>
         {/* <Link to="/articles">Articles</Link> */}
-        <Link to="/topics">Topics</Link>
+        <Link to="/articles">Topics</Link>
       </nav>
     </div>
   );

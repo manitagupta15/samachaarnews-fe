@@ -3,19 +3,19 @@ import { fetchArticles, fetchArticlesByTopic } from "../api";
 import ArticleCard from "./ArticleCard";
 import { Link, useParams } from "react-router-dom";
 
-export default function Topics() {
-  const [articlesByTopic, setArticlesByTopic] = useState([]);
+export default function Articles() {
+  const [articles, setArticles] = useState([]);
 
   const { topic } = useParams();
 
   useEffect(() => {
     if (topic === undefined) {
       fetchArticles().then((articles) => {
-        setArticlesByTopic(articles);
+        setArticles(articles);
       });
     } else {
       fetchArticlesByTopic(topic).then((returnedArticles) => {
-        setArticlesByTopic(returnedArticles);
+        setArticles(returnedArticles);
       });
     }
   }, [topic]);
@@ -37,7 +37,12 @@ export default function Topics() {
         <button className="topic-button">🍲Cooking</button>
       </Link>
       <hr />
-      {articlesByTopic.map((article) => {
+      {topic !== undefined ? (
+        <h3 className="topic">Showing All articles retalated to {topic}</h3>
+      ) : (
+        <h3 className="topic">Showing all the articles:</h3>
+      )}
+      {articles.map((article) => {
         return <ArticleCard key={article.article_id} article={article} />;
       })}
     </div>

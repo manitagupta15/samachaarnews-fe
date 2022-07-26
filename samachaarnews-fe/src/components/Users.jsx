@@ -31,7 +31,7 @@ export default function Users() {
               className="user"
               onClick={() => {
                 setName(user.name);
-                navigate("/topics");
+                navigate("/articles");
               }}
             >
               Select user

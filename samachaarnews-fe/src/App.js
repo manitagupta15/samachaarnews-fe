@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Users from "./components/Users";
-import Topics from "./components/Topics";
+import Articles from "./components/Articles";
 import Footer from "./components/Footer";
 
 import { useState } from "react";
@@ -26,9 +26,9 @@ function App() {
               path="/"
               element={<Users username={username} setUsername={setUsername} />}
             />
-            <Route path="/articles" element={<Topics />} />
-            <Route path="/topics" element={<Topics />} />
-            <Route path="/articles/:topic" element={<Topics />} />
+            <Route path="/articles" element={<Articles />} />
+            {/* <Route path="/topics" element={<Topics />} /> */}
+            <Route path="/articles/:topic" element={<Articles />} />
           </Routes>{" "}
           <Footer />
         </div>
