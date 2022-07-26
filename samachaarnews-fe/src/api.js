@@ -35,3 +35,15 @@ exports.fetchArticleById = (article_id) => {
     return article;
   });
 };
+
+exports.patchArticleVotes = (article_id, vote) => {
+  const path = axios.create({
+    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
+  });
+  const input = { inc_votes: +vote };
+  return path
+    .patch(`/articles/${article_id}`, input)
+    .then(({ data: { article } }) => {
+      return article;
+    });
+};
