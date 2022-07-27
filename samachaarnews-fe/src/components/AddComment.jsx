@@ -41,6 +41,7 @@ export default function AddComment({
         <label>body</label>
         <input
           type="text"
+          value={input}
           onChange={(e) => {
             setInput(e.target.value);
           }}
