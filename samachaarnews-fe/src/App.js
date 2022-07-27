@@ -28,15 +28,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Users />} />
             <Route path="/articles" element={<Articles />} />
+
             <Route path="/articles/:topic" element={<Articles />} />
+
             <Route
               path="/articles/articleId/:article_id"
               element={<ArticleDetails />}
             />
-            <Route
-              path="/articles/?sort_by=created_at"
-              element={<Articles />}
-            />
+
             <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />

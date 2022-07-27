@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchArticles, fetchArticlesByTopic, sortArticles } from "../api";
+import { fetchArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import { Link, useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
@@ -7,26 +7,18 @@ import { useSearchParams } from "react-router-dom";
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [sortBy, setSortBy] = useState("created_at");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { topic } = useParams();
 
   useEffect(() => {
-    if (topic === undefined) {
-      fetchArticles().then((articles) => {
-        setArticles(articles);
-      });
-    } else {
-      fetchArticlesByTopic(topic).then((returnedArticles) => {
-        setArticles(returnedArticles);
-      });
-    }
-  }, [topic]);
+    searchParams.set("sort_by", sortBy);
+    setSearchParams(searchParams);
 
-  useEffect(() => {
-    sortArticles(sortBy).then((articles) => {
+    fetchArticles(topic, sortBy).then((articles) => {
       setArticles(articles);
     });
-  }, [sortBy]);
+  }, [topic, sortBy, searchParams, setSearchParams]);
 
   return (
     <div>
@@ -44,18 +36,21 @@ export default function Articles() {
       <Link to="/articles/cooking">
         <button className="topic-button">🍲Cooking</button>
       </Link>
-      {/* ------------------------------ */}
-      {/* <Link to="/articles/?sort_by=created_at">
-        <input type="radio" value="article_id">
-          article_id
-        </input>
-      </Link> */}
+
       <form
         onChange={(e) => {
           setSortBy(e.target.value);
         }}
       >
         <label>Sort By:</label>
+        <input
+          type="radio"
+          id="sort7"
+          name="sort_by"
+          value="created_at"
+          defaultChecked
+        />
+        <label htmlFor="sort2">Date-time</label>
         <input type="radio" id="sort1" name="sort_by" value="votes" />
         <label htmlFor="sort1">votes</label>
         <input type="radio" id="sort2" name="sort_by" value="article_id" />
@@ -70,12 +65,11 @@ export default function Articles() {
         <label htmlFor="sort2">Body</label>
       </form>
 
-      {/* ------------------------------ */}
       <hr />
-      {topic !== undefined ? (
+      {topic ? (
         <h3 className="topic">Showing All articles retalated to {topic}</h3>
       ) : (
-        <h3 className="topic">Showing all the articles:</h3>
+        <></>
       )}
       {articles.map((article) => {
         return <ArticleCard key={article.article_id} article={article} />;

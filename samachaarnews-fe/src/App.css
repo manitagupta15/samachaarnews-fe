@@ -119,3 +119,11 @@ label {
   border-style: solid;
   border-color: red;
 }
+
+.new-comment-body {
+  height: 3rem;
+  font-size: 1.5rem;
+  width: auto;
+  border-radius: 25px;
+  padding-left: 1rem;
+}

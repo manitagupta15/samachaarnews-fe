@@ -9,22 +9,20 @@ exports.fetchUsers = () => {
   });
 };
 
-exports.fetchArticles = () => {
+exports.fetchArticles = (topic, sortby) => {
   const path = axios.create({
     baseURL: "https://nc-news-samachaara.herokuapp.com/api",
   });
-  return path.get(`/articles`).then(({ data: { articles } }) => {
-    return articles;
-  });
-};
-
-exports.fetchArticlesByTopic = (topic) => {
-  const path = axios.create({
-    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
-  });
-  return path.get(`/articles?topic=${topic}`).then(({ data: { articles } }) => {
-    return articles;
-  });
+  return path
+    .get(`/articles`, {
+      params: {
+        topic: topic,
+        sort_by: sortby,
+      },
+    })
+    .then(({ data: { articles } }) => {
+      return articles;
+    });
 };
 
 exports.fetchArticleById = (article_id) => {
@@ -68,17 +66,5 @@ exports.postComment = (newComment, article_id) => {
     .post(`/articles/${article_id}/comments`, newComment)
     .then(({ data: { comment } }) => {
       return comment;
-    });
-};
-
-exports.sortArticles = (sort_by) => {
-  const path = axios.create({
-    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
-  });
-
-  return path
-    .get(`/articles?sort_by=${sort_by}`)
-    .then(({ data: { articles } }) => {
-      return articles;
     });
 };

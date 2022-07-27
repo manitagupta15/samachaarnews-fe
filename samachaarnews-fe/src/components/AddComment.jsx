@@ -38,8 +38,9 @@ export default function AddComment({
   return (
     <section>
       <form onSubmit={handleComment}>
-        <label>body</label>
+        <label>Comment: </label>
         <input
+          className="new-comment-body"
           type="text"
           value={input}
           onChange={(e) => {
