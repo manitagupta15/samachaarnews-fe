@@ -9,6 +9,7 @@ import Users from "./components/Users";
 import Articles from "./components/Articles";
 import Footer from "./components/Footer";
 import ArticleDetails from "./components/ArticleDetails";
+import ErrorPage from "./components/ErrorPage";
 
 import { useState } from "react";
 
@@ -18,21 +19,21 @@ function App() {
 
   return (
     <BrowserRouter>
-      <userNameContext.Provider value={{ name, setName }}>
+      <userNameContext.Provider
+        value={{ name, setName, username, setUsername }}
+      >
         <div className="App">
           <Header />
           <Navigation />
           <Routes>
-            <Route
-              path="/"
-              element={<Users username={username} setUsername={setUsername} />}
-            />
+            <Route path="/" element={<Users />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/articles/:topic" element={<Articles />} />
             <Route
               path="/articles/articleId/:article_id"
               element={<ArticleDetails />}
             />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />
         </div>

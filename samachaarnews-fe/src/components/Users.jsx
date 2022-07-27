@@ -4,7 +4,7 @@ import { fetchUsers } from "../api";
 import { userNameContext } from "../Context/context";
 
 export default function Users() {
-  const { setName } = useContext(userNameContext);
+  const { setName, setUsername } = useContext(userNameContext);
   const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
@@ -31,6 +31,7 @@ export default function Users() {
               className="user"
               onClick={() => {
                 setName(user.name);
+                setUsername(user.username);
                 navigate("/articles");
               }}
             >
