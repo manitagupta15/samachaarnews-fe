@@ -4,9 +4,13 @@ import { userNameContext } from "../Context/context";
 
 import { postComment } from "../api";
 
-export default function AddComment({ setComments }) {
-  
-    const [input, setInput] = useState("");
+export default function AddComment({
+  setComments,
+  setAddCommentClick,
+  commentPost,
+  setCommentPost,
+}) {
+  const [input, setInput] = useState("");
 
   const { username } = useContext(userNameContext);
   const { article_id } = useParams();
@@ -20,11 +24,13 @@ export default function AddComment({ setComments }) {
         username: username,
         body: input,
       };
-
       postComment(newComment, article_id).then((comment) => {
+        setCommentPost(true);
+
         setComments((currentComment) => {
           return [comment, ...currentComment];
         });
+        setAddCommentClick(false);
       });
     }
   };
@@ -39,7 +45,7 @@ export default function AddComment({ setComments }) {
             setInput(e.target.value);
           }}
         ></input>
-        <button>Submit</button>
+        <button disabled={commentPost}>Submit</button>
       </form>
     </section>
   );

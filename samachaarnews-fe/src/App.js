@@ -9,6 +9,7 @@ import Users from "./components/Users";
 import Articles from "./components/Articles";
 import Footer from "./components/Footer";
 import ArticleDetails from "./components/ArticleDetails";
+import ErrorPage from "./components/ErrorPage";
 
 import { useState } from "react";
 
@@ -32,6 +33,7 @@ function App() {
               path="/articles/articleId/:article_id"
               element={<ArticleDetails />}
             />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />
         </div>

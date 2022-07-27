@@ -17,16 +17,19 @@ export default function ArticleDetails() {
   const [buttonText, setButtonText] = useState("👍");
   const [comments, setComments] = useState([]);
   const [addCommentClick, setAddCommentClick] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [commentPost, setCommentPost] = useState(false);
 
   useEffect(() => {
     fetchArticleById(article_id).then((article) => {
       setArticle(article);
+      setIsLoading(false);
     });
 
     fetchComments(article_id).then((comments) => {
       setComments(comments);
     });
-  }, [article_id]);
+  }, [article_id, comments]);
 
   useEffect(() => {
     patchArticleVotes(article_id, count).catch((err) => {
@@ -38,6 +41,7 @@ export default function ArticleDetails() {
   if (error) {
     return <p>Sorry can't change votes at this time...</p>;
   }
+  if (isLoading) return <p>loading details...</p>;
 
   return (
     <div>
@@ -59,8 +63,10 @@ export default function ArticleDetails() {
           <label>Comments: </label>
           <span className="comment-count">{article.comment_count}</span>
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setAddCommentClick((currentValue) => !currentValue);
+              setCommentPost(false);
             }}
           >
             Add comment
@@ -91,7 +97,18 @@ export default function ArticleDetails() {
         </div>
       </section>
 
-      {addCommentClick ? <AddComment setComments={setComments} /> : <></>}
+      {addCommentClick ? (
+        <AddComment
+          setComments={setComments}
+          setAddCommentClick={setAddCommentClick}
+          commentPost={commentPost}
+          setCommentPost={setCommentPost}
+        />
+      ) : (
+        <></>
+      )}
+      {commentPost ? <p>comments Posted...</p> : <></>}
+
       <br />
       {comments.map((comment) => {
         return (
