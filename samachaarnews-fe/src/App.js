@@ -33,6 +33,10 @@ function App() {
               path="/articles/articleId/:article_id"
               element={<ArticleDetails />}
             />
+            <Route
+              path="/articles/?sort_by=created_at"
+              element={<Articles />}
+            />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />
