@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import AddComment from "./AddComment";
+
 import { fetchArticleById, patchArticleVotes, fetchComments } from "../api";
 
 export default function ArticleDetails() {
@@ -14,6 +16,7 @@ export default function ArticleDetails() {
   const [isPlusChecked, setIsPlusChecked] = useState(false);
   const [buttonText, setButtonText] = useState("👍");
   const [comments, setComments] = useState([]);
+  const [addCommentClick, setAddCommentClick] = useState(false);
 
   useEffect(() => {
     fetchArticleById(article_id).then((article) => {
@@ -55,6 +58,13 @@ export default function ArticleDetails() {
         <div>
           <label>Comments: </label>
           <span className="comment-count">{article.comment_count}</span>
+          <button
+            onClick={() => {
+              setAddCommentClick((currentValue) => !currentValue);
+            }}
+          >
+            Add comment
+          </button>
         </div>
 
         <div>
@@ -81,6 +91,7 @@ export default function ArticleDetails() {
         </div>
       </section>
 
+      {addCommentClick ? <AddComment setComments={setComments} /> : <></>}
       <br />
       {comments.map((comment) => {
         return (
