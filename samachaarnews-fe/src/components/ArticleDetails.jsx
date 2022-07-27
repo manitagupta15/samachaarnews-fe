@@ -29,7 +29,7 @@ export default function ArticleDetails() {
     fetchComments(article_id).then((comments) => {
       setComments(comments);
     });
-  }, [article_id, comments]);
+  }, [article_id]);
 
   useEffect(() => {
     patchArticleVotes(article_id, count).catch((err) => {
