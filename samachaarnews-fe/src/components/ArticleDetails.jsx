@@ -126,12 +126,9 @@ export default function ArticleDetails() {
       {comments.map((comment) => {
         return (
           <section className="comment" key={comment.comment_id}>
-            <p>{comment.body}</p>
-            <p>-by {comment.author}</p>
-            <p>Comment Id - {comment.comment_id}</p>
-
             {username === comment.author ? (
               <button
+                className="delete"
                 onClick={() => {
                   deleteComment(comment.comment_id).then(() => {
                     setDeleteCommentStatus(true);
@@ -147,7 +144,9 @@ export default function ArticleDetails() {
               </button>
             ) : (
               <></>
-            )}
+            )}{" "}
+            <p>{comment.body}</p>
+            <p>-by {comment.author}</p>
           </section>
         );
       })}

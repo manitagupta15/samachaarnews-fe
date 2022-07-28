@@ -103,7 +103,8 @@ label {
   border-style: solid;
   margin: 0.25rem;
   text-align: justify;
-  padding: 0.25rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .vote-position {
@@ -118,4 +119,9 @@ label {
   width: auto;
   border-style: solid;
   border-color: red;
+}
+.delete {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
 }
