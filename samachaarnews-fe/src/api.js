@@ -69,3 +69,13 @@ exports.postComment = (newComment, article_id) => {
       return comment;
     });
 };
+
+exports.deleteComment = (commentId) => {
+  const path = axios.create({
+    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
+  });
+
+  return path.delete(`comments/${commentId}`).then(({ statusText }) => {
+    return statusText;
+  });
+};

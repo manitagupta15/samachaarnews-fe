@@ -23,8 +23,6 @@ export default function ArticleCard({ article }) {
         <Link to={`/articles/articleId/${article.article_id}`}>
           <button>View Article</button>
         </Link>
-
-        {/* <hr /> */}
       </article>
     </div>
   );

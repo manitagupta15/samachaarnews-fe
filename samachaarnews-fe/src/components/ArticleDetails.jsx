@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { userNameContext } from "../Context/context";
 
 import AddComment from "./AddComment";
 
-import { fetchArticleById, patchArticleVotes, fetchComments } from "../api";
+import {
+  fetchArticleById,
+  patchArticleVotes,
+  fetchComments,
+  deleteComment,
+} from "../api";
 
 export default function ArticleDetails() {
   const { article_id } = useParams();
   const navigate = useNavigate();
+
+  const { username } = useContext(userNameContext);
 
   const [article, setArticle] = useState(article_id);
   const [votes, setVotes] = useState(0);
@@ -16,6 +25,7 @@ export default function ArticleDetails() {
   const [isPlusChecked, setIsPlusChecked] = useState(false);
   const [buttonText, setButtonText] = useState("👍");
   const [comments, setComments] = useState([]);
+  const [deleteCommentStatus, setDeleteCommentStatus] = useState(false);
   const [addCommentClick, setAddCommentClick] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [commentPost, setCommentPost] = useState(false);
@@ -48,7 +58,6 @@ export default function ArticleDetails() {
       <p>Article Id: {article.article_id}</p>
       <h2>{article.title}</h2>
       <p className="article-body">{article.body}</p>
-
       <section className="vote-position">
         <button
           className="back"
@@ -67,6 +76,7 @@ export default function ArticleDetails() {
               e.preventDefault();
               setAddCommentClick((currentValue) => !currentValue);
               setCommentPost(false);
+              setDeleteCommentStatus(false);
             }}
           >
             Add comment
@@ -97,6 +107,8 @@ export default function ArticleDetails() {
         </div>
       </section>
 
+      {deleteCommentStatus ? <p>Comment deleted..</p> : <></>}
+
       {addCommentClick ? (
         <AddComment
           setComments={setComments}
@@ -107,12 +119,32 @@ export default function ArticleDetails() {
       ) : (
         <></>
       )}
-      {commentPost ? <p>comments Posted...</p> : <></>}
+
+      {commentPost && !deleteCommentStatus ? <p>Comments Posted...</p> : <></>}
 
       <br />
       {comments.map((comment) => {
         return (
           <section className="comment" key={comment.comment_id}>
+            {username === comment.author ? (
+              <button
+                className="delete"
+                onClick={() => {
+                  deleteComment(comment.comment_id).then(() => {
+                    setDeleteCommentStatus(true);
+                    const newComments = comments.filter((com) => {
+                      return com.comment_id !== comment.comment_id;
+                    });
+
+                    setComments(newComments);
+                  });
+                }}
+              >
+                ❌
+              </button>
+            ) : (
+              <></>
+            )}{" "}
             <p>{comment.body}</p>
             <p>-by {comment.author}</p>
           </section>
