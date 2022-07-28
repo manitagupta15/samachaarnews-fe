@@ -76,7 +76,7 @@ exports.deleteComment = (commentId) => {
     baseURL: "https://nc-news-samachaara.herokuapp.com/api",
   });
 
-  return path.delete(`comments/${commentId}`).then(() => {
-    console.log("deleted successfully");
+  return path.delete(`comments/${commentId}`).then(({ statusText }) => {
+    return statusText;
   });
 };

@@ -25,7 +25,6 @@ export default function ArticleDetails() {
   const [isPlusChecked, setIsPlusChecked] = useState(false);
   const [buttonText, setButtonText] = useState("👍");
   const [comments, setComments] = useState([]);
-  const [commentId, setCommentId] = useState();
   const [deleteCommentStatus, setDeleteCommentStatus] = useState(false);
   const [addCommentClick, setAddCommentClick] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -48,14 +47,6 @@ export default function ArticleDetails() {
       setVotes(votes - count);
     });
   }, [article_id, count, votes]);
-
-  useEffect(() => {
-    //deleteCommentStatus(false);
-    console.log("comment deleted", commentId);
-    deleteComment(commentId).then(() => {
-      setDeleteCommentStatus(true);
-    });
-  }, [commentId]);
 
   if (error) {
     return <p>Sorry can't change votes at this time...</p>;
@@ -85,6 +76,7 @@ export default function ArticleDetails() {
               e.preventDefault();
               setAddCommentClick((currentValue) => !currentValue);
               setCommentPost(false);
+              setDeleteCommentStatus(false);
             }}
           >
             Add comment
@@ -114,7 +106,9 @@ export default function ArticleDetails() {
           <span className="comment-count">{article.votes}</span>
         </div>
       </section>
-      {deleteCommentStatus ? <p> Comment deleted</p> : <></>}
+
+      {deleteCommentStatus ? <p>Comment deleted..</p> : <></>}
+
       {addCommentClick ? (
         <AddComment
           setComments={setComments}
@@ -125,20 +119,28 @@ export default function ArticleDetails() {
       ) : (
         <></>
       )}
-      {commentPost ? <p>comments Posted...</p> : <></>}
+
+      {commentPost && !deleteCommentStatus ? <p>Comments Posted...</p> : <></>}
+
       <br />
       {comments.map((comment) => {
         return (
           <section className="comment" key={comment.comment_id}>
             <p>{comment.body}</p>
             <p>-by {comment.author}</p>
-            <p>-by {comment.comment_id}</p>
+            <p>Comment Id - {comment.comment_id}</p>
 
             {username === comment.author ? (
               <button
                 onClick={() => {
-                  setCommentId(comment.comment_id);
-                  console.log(commentId);
+                  deleteComment(comment.comment_id).then(() => {
+                    setDeleteCommentStatus(true);
+                    const newComments = comments.filter((com) => {
+                      return com.comment_id !== comment.comment_id;
+                    });
+
+                    setComments(newComments);
+                  });
                 }}
               >
                 ❌
