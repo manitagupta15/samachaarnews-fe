@@ -9,7 +9,7 @@ exports.fetchUsers = () => {
   });
 };
 
-exports.fetchArticles = (topic, sortby) => {
+exports.fetchArticles = (topic, sortby, orderby) => {
   const path = axios.create({
     baseURL: "https://nc-news-samachaara.herokuapp.com/api",
   });
@@ -18,6 +18,7 @@ exports.fetchArticles = (topic, sortby) => {
       params: {
         topic: topic,
         sort_by: sortby,
+        order: orderby,
       },
     })
     .then(({ data: { articles } }) => {

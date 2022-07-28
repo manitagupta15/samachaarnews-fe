@@ -7,18 +7,20 @@ import { useSearchParams } from "react-router-dom";
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [sortBy, setSortBy] = useState("created_at");
+  const [orderBy, setOrderBy] = useState("DESC");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { topic } = useParams();
 
   useEffect(() => {
     searchParams.set("sort_by", sortBy);
+    searchParams.set("order", orderBy);
     setSearchParams(searchParams);
 
-    fetchArticles(topic, sortBy).then((articles) => {
+    fetchArticles(topic, sortBy, orderBy).then((articles) => {
       setArticles(articles);
     });
-  }, [topic, sortBy, searchParams, setSearchParams]);
+  }, [topic, sortBy, searchParams, setSearchParams, orderBy]);
 
   return (
     <div>
@@ -63,6 +65,24 @@ export default function Articles() {
         <label htmlFor="sort2">Author</label>
         <input type="radio" id="sort6" name="sort_by" value="body" />
         <label htmlFor="sort2">Body</label>
+      </form>
+
+      <form
+        onChange={(e) => {
+          setOrderBy(e.target.value);
+        }}
+      >
+        <label>Order By:</label>
+        <input
+          type="radio"
+          id="order1"
+          name="order_by"
+          value="DESC"
+          defaultChecked
+        />
+        <label htmlFor="sort2">Descending</label>
+        <input type="radio" id="order2" name="order_by" value="ASC" />
+        <label htmlFor="sort2">Ascending</label>
       </form>
 
       <hr />
