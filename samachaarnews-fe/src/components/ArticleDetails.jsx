@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { userNameContext } from "../Context/context";
 
 import AddComment from "./AddComment";
 
-import { fetchArticleById, patchArticleVotes, fetchComments } from "../api";
+import {
+  fetchArticleById,
+  patchArticleVotes,
+  fetchComments,
+  deleteComment,
+} from "../api";
 
 export default function ArticleDetails() {
   const { article_id } = useParams();
   const navigate = useNavigate();
+
+  const { username } = useContext(userNameContext);
 
   const [article, setArticle] = useState(article_id);
   const [votes, setVotes] = useState(0);
@@ -16,6 +25,8 @@ export default function ArticleDetails() {
   const [isPlusChecked, setIsPlusChecked] = useState(false);
   const [buttonText, setButtonText] = useState("👍");
   const [comments, setComments] = useState([]);
+  const [commentId, setCommentId] = useState();
+  const [deleteCommentStatus, setDeleteCommentStatus] = useState(false);
   const [addCommentClick, setAddCommentClick] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [commentPost, setCommentPost] = useState(false);
@@ -38,6 +49,14 @@ export default function ArticleDetails() {
     });
   }, [article_id, count, votes]);
 
+  useEffect(() => {
+    //deleteCommentStatus(false);
+    console.log("comment deleted", commentId);
+    deleteComment(commentId).then(() => {
+      setDeleteCommentStatus(true);
+    });
+  }, [commentId]);
+
   if (error) {
     return <p>Sorry can't change votes at this time...</p>;
   }
@@ -48,7 +67,6 @@ export default function ArticleDetails() {
       <p>Article Id: {article.article_id}</p>
       <h2>{article.title}</h2>
       <p className="article-body">{article.body}</p>
-
       <section className="vote-position">
         <button
           className="back"
@@ -96,7 +114,7 @@ export default function ArticleDetails() {
           <span className="comment-count">{article.votes}</span>
         </div>
       </section>
-
+      {deleteCommentStatus ? <p> Comment deleted</p> : <></>}
       {addCommentClick ? (
         <AddComment
           setComments={setComments}
@@ -108,13 +126,26 @@ export default function ArticleDetails() {
         <></>
       )}
       {commentPost ? <p>comments Posted...</p> : <></>}
-
       <br />
       {comments.map((comment) => {
         return (
           <section className="comment" key={comment.comment_id}>
             <p>{comment.body}</p>
             <p>-by {comment.author}</p>
+            <p>-by {comment.comment_id}</p>
+
+            {username === comment.author ? (
+              <button
+                onClick={() => {
+                  setCommentId(comment.comment_id);
+                  console.log(commentId);
+                }}
+              >
+                ❌
+              </button>
+            ) : (
+              <></>
+            )}
           </section>
         );
       })}
