@@ -9,7 +9,7 @@ export default function Navigation() {
     <div>
       <h4>Welcome {name}</h4>
       <nav className="nav-bar">
-        <Link to="/">👤Change User</Link>
+        <Link to="/users">👤Change User</Link>
         <Link to="/articles">Topics</Link>
       </nav>
     </div>
