@@ -11,6 +11,7 @@ import {
   fetchComments,
   deleteComment,
 } from "../api";
+import ErrorPage from "./ErrorPage";
 
 export default function ArticleDetails() {
   const { article_id } = useParams();
@@ -31,14 +32,29 @@ export default function ArticleDetails() {
   const [commentPost, setCommentPost] = useState(false);
 
   useEffect(() => {
-    fetchArticleById(article_id).then((article) => {
-      setArticle(article);
-      setIsLoading(false);
-    });
+    setIsLoading(true);
 
-    fetchComments(article_id).then((comments) => {
-      setComments(comments);
-    });
+    fetchArticleById(article_id)
+      .then((article) => {
+        setArticle(article);
+        setIsLoading(false);
+        setError(null);
+      })
+      .catch(({ response }) => {
+        setIsLoading(false);
+        setError({ status: response.status, msg: response.data.msg });
+      });
+
+    fetchComments(article_id)
+      .then((comments) => {
+        setComments(comments);
+        setIsLoading(false);
+        setError(null);
+      })
+      .catch(({ response }) => {
+        setIsLoading(false);
+        setError({ status: response.status, msg: response.data.msg });
+      });
   }, [article_id]);
 
   useEffect(() => {
@@ -49,8 +65,9 @@ export default function ArticleDetails() {
   }, [article_id, count, votes]);
 
   if (error) {
-    return <p>Sorry can't change votes at this time...</p>;
+    return <ErrorPage status={error.status} msg={error.msg} />;
   }
+
   if (isLoading) return <p>loading details...</p>;
 
   return (
@@ -127,21 +144,31 @@ export default function ArticleDetails() {
         return (
           <section className="comment" key={comment.comment_id}>
             {username === comment.author ? (
-              <button
-                className="delete"
-                onClick={() => {
-                  deleteComment(comment.comment_id).then(() => {
-                    setDeleteCommentStatus(true);
-                    const newComments = comments.filter((com) => {
-                      return com.comment_id !== comment.comment_id;
-                    });
+              <div>
+                <span className="delete-msg">Would you like to delete this comment</span>
+                <button
+                  className="delete"
+                  onClick={() => {
+                    deleteComment(comment.comment_id)
+                      .then(() => {
+                        setDeleteCommentStatus(true);
+                        const newComments = comments.filter((com) => {
+                          return com.comment_id !== comment.comment_id;
+                        });
 
-                    setComments(newComments);
-                  });
-                }}
-              >
-                ❌
-              </button>
+                        setComments(newComments);
+                      })
+                      .catch(({ response }) => {
+                        setError({
+                          status: response.status,
+                          msg: response.data.msg,
+                        });
+                      });
+                  }}
+                >
+                  ❌
+                </button>
+              </div>
             ) : (
               <></>
             )}{" "}

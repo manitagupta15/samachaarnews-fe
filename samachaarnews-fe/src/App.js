@@ -26,7 +26,9 @@ function App() {
           <Header />
           <Navigation />
           <Routes>
-            <Route path="/" element={<Users />} />
+            <Route path="/" element={<Articles />} />
+
+            <Route path="/users" element={<Users />} />
             <Route path="/articles" element={<Articles />} />
 
             <Route path="/articles/:topic" element={<Articles />} />

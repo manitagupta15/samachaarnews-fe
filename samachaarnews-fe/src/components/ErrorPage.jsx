@@ -7,7 +7,7 @@ export default function ErrorPage({ status, msg }) {
       <h3>
         {status}:{msg || "Looks like you are lost.."}
       </h3>
-      <Link to="/">back to Home page</Link>
+      <Link to="/articles">Back to Topics page</Link>
     </main>
   );
 }
