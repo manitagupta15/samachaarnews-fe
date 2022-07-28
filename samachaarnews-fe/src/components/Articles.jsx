@@ -55,16 +55,12 @@ export default function Articles() {
         <label htmlFor="sort2">Date-time</label>
         <input type="radio" id="sort1" name="sort_by" value="votes" />
         <label htmlFor="sort1">votes</label>
-        <input type="radio" id="sort2" name="sort_by" value="article_id" />
-        <label htmlFor="sort2">Article Id</label>
         <input type="radio" id="sort3" name="sort_by" value="title" />
         <label htmlFor="sort2">Title</label>
         <input type="radio" id="sort4" name="sort_by" value="topic" />
         <label htmlFor="sort2">Topic</label>
         <input type="radio" id="sort5" name="sort_by" value="author" />
         <label htmlFor="sort2">Author</label>
-        <input type="radio" id="sort6" name="sort_by" value="body" />
-        <label htmlFor="sort2">Body</label>
       </form>
 
       <form
@@ -87,7 +83,7 @@ export default function Articles() {
 
       <hr />
       {topic ? (
-        <h3 className="topic">Showing All articles retalated to {topic}</h3>
+        <h3 className="topic">Showing All articles related to {topic}</h3>
       ) : (
         <></>
       )}
