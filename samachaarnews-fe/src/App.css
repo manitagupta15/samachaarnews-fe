@@ -2,7 +2,7 @@ body {
   background-color: rgb(249, 177, 100);
   margin-left: 2rem;
   margin-right: 2rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin-bottom: 2rem;
 }
 header {
@@ -23,6 +23,7 @@ img {
   justify-content: space-evenly;
   padding: 25px;
   margin: 8px;
+  font-size: 2rem;
 }
 h4 {
   margin-bottom: 0.75rem;
@@ -84,7 +85,7 @@ button:hover {
 
 .article-body {
   border-style: double;
-  border-color: red;
+  border-color: rgb(228, 89, 15);
   border-width: 0.5rem;
   padding: 2rem;
   font-size: 25px;
@@ -102,9 +103,10 @@ label {
 .comment {
   border-style: solid;
   margin: 0.25rem;
-  text-align: justify;
+  text-align: center;
   padding-left: 2rem;
   padding-right: 2rem;
+  border-color: rgb(21, 53, 195);
 }
 
 .vote-position {
@@ -118,7 +120,9 @@ label {
   flex-direction: column;
   width: auto;
   border-style: solid;
-  border-color: red;
+  border-color: blueviolet;
+  border-width: 0.25rem;
+  margin: 0.5rem;
 }
 .delete {
   width: 2rem;
@@ -131,4 +135,7 @@ label {
   width: auto;
   border-radius: 25px;
   padding-left: 1rem;
+}
+.delete-msg {
+  color: red;
 }

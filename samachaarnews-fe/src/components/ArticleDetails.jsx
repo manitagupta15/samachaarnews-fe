@@ -144,28 +144,31 @@ export default function ArticleDetails() {
         return (
           <section className="comment" key={comment.comment_id}>
             {username === comment.author ? (
-              <button
-                className="delete"
-                onClick={() => {
-                  deleteComment(comment.comment_id)
-                    .then(() => {
-                      setDeleteCommentStatus(true);
-                      const newComments = comments.filter((com) => {
-                        return com.comment_id !== comment.comment_id;
-                      });
+              <div>
+                <span className="delete-msg">Would you like to delete this comment</span>
+                <button
+                  className="delete"
+                  onClick={() => {
+                    deleteComment(comment.comment_id)
+                      .then(() => {
+                        setDeleteCommentStatus(true);
+                        const newComments = comments.filter((com) => {
+                          return com.comment_id !== comment.comment_id;
+                        });
 
-                      setComments(newComments);
-                    })
-                    .catch(({ response }) => {
-                      setError({
-                        status: response.status,
-                        msg: response.data.msg,
+                        setComments(newComments);
+                      })
+                      .catch(({ response }) => {
+                        setError({
+                          status: response.status,
+                          msg: response.data.msg,
+                        });
                       });
-                    });
-                }}
-              >
-                ❌
-              </button>
+                  }}
+                >
+                  ❌
+                </button>
+              </div>
             ) : (
               <></>
             )}{" "}
