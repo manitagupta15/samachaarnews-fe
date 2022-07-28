@@ -9,22 +9,21 @@ exports.fetchUsers = () => {
   });
 };
 
-exports.fetchArticles = () => {
+exports.fetchArticles = (topic, sortby, orderby) => {
   const path = axios.create({
     baseURL: "https://nc-news-samachaara.herokuapp.com/api",
   });
-  return path.get(`/articles`).then(({ data: { articles } }) => {
-    return articles;
-  });
-};
-
-exports.fetchArticlesByTopic = (topic) => {
-  const path = axios.create({
-    baseURL: "https://nc-news-samachaara.herokuapp.com/api",
-  });
-  return path.get(`/articles?topic=${topic}`).then(({ data: { articles } }) => {
-    return articles;
-  });
+  return path
+    .get(`/articles`, {
+      params: {
+        topic: topic,
+        sort_by: sortby,
+        order: orderby,
+      },
+    })
+    .then(({ data: { articles } }) => {
+      return articles;
+    });
 };
 
 exports.fetchArticleById = (article_id) => {
