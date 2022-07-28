@@ -3,24 +3,42 @@ import { fetchArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 import { Link, useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [sortBy, setSortBy] = useState("created_at");
   const [orderBy, setOrderBy] = useState("DESC");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const { topic } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
+
     searchParams.set("sort_by", sortBy);
     searchParams.set("order", orderBy);
     setSearchParams(searchParams);
 
-    fetchArticles(topic, sortBy, orderBy).then((articles) => {
-      setArticles(articles);
-    });
+    fetchArticles(topic, sortBy, orderBy)
+      .then((articles) => {
+        setArticles(articles);
+        setIsLoading(false);
+        setError(null);
+      })
+      .catch(({ response }) => {
+        setIsLoading(false);
+        setError({ status: response.status, msg: response.data.msg });
+      });
   }, [topic, sortBy, searchParams, setSearchParams, orderBy]);
+
+  if (isLoading) return <p>loading details...</p>;
+
+  if (error) {
+    return <ErrorPage status={error.status} msg={error.msg} />;
+  }
 
   return (
     <div>

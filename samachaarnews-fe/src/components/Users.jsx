@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchUsers } from "../api";
 import { userNameContext } from "../Context/context";
+import ErrorPage from "./ErrorPage";
 
 export default function Users() {
   const { setName, setUsername } = useContext(userNameContext);
@@ -9,15 +10,28 @@ export default function Users() {
 
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchUsers().then((users) => {
-      setUsers(users);
-      setIsLoading(false);
-    });
+    setIsLoading(true);
+
+    fetchUsers()
+      .then((users) => {
+        setUsers(users);
+        setIsLoading(false);
+        setError(null);
+      })
+      .catch(({ response }) => {
+        setIsLoading(false);
+        setError({ status: response.status, msg: response.data.msg });
+      });
   }, []);
 
   if (isLoading) return <p>loading users...</p>;
+
+  if (error) {
+    return <ErrorPage status={error.status} msg={error.msg} />;
+  }
 
   return (
     <div>
