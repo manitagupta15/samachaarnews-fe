@@ -9,6 +9,7 @@ Heroku Link - https://nc-news-samachaara.herokuapp.com/
 It makes requests to the back end hosted on Heroku to get data and manipulate it based on the request made.
 
 Samachaar News is a social news aggregation, web content rating, and discussion website.
+
 Samachaar News has articles which are divided into topics. Each article has user curated ratings and can be up or down voted using the API. Users can also add and delete comments about an article.
 
 ## Wire frames
@@ -19,17 +20,17 @@ During the designing of the app, decisions were made to change the look slightly
 
 ## Endpoints
 
-'/' -> Shows a list of all articles
+'/' -> Shows a list of all articles.
 
-'/articles/:topic -> Shows articles that are :topic specific
+'/articles/:topic -> Shows articles that are :topic specific.
 
-'/articles/articleId/:article_id' -> Shows the article details with that article_id
+'/articles/articleId/:article_id' -> Shows the article details with that article_id.
 
-'/users' -> Shows a list of users and can select specific users
+'/users' -> Shows a list of all users and can also select specific users.
 
 ## Installation
 
-Run the following command to install all the dependencies
+Run the following command to install all the dependencies -
 
 ```bash
 npm install
