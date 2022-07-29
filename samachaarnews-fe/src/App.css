@@ -49,9 +49,13 @@ h2 {
   text-align: justify;
   margin: 0.25rem;
   height: 1.25rem;
+  border-radius: 50px;
 }
 .comment-count {
   background-color: orange;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  
 }
 hr {
   background-color: rgb(255, 0, 230);

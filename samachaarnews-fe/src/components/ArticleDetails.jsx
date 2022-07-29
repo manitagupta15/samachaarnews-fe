@@ -86,8 +86,9 @@ export default function ArticleDetails() {
         </button>
 
         <div>
-          <label>Comments: </label>
-          <span className="comment-count">{article.comment_count}</span>
+          <span className="comment-count">
+            Comments | {article.comment_count}
+          </span>
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -145,7 +146,9 @@ export default function ArticleDetails() {
           <section className="comment" key={comment.comment_id}>
             {username === comment.author ? (
               <div>
-                <span className="delete-msg">Would you like to delete this comment</span>
+                <span className="delete-msg">
+                  Would you like to delete this comment
+                </span>
                 <button
                   className="delete"
                   onClick={() => {
