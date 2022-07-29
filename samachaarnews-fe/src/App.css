@@ -1,12 +1,14 @@
 body {
-  background-color: rgb(249, 177, 100);
+  background-color: rgba(2, 251, 251, 0.366);
   margin-left: 2rem;
   margin-right: 2rem;
   font-size: 1.5rem;
   margin-bottom: 2rem;
 }
 header {
-  color: red;
+  font-family: "Special Elite", cursive;
+  color: rgb(255, 0, 85);
+  background-color: greenyellow;
 }
 
 .App {
@@ -18,16 +20,21 @@ img {
 }
 
 .nav-bar {
-  background-color: rgb(46, 206, 153);
+  background-color: rgb(242, 238, 7);
   display: flex;
   justify-content: space-evenly;
   padding: 25px;
   margin: 8px;
   font-size: 2rem;
+  font-family: "Special Elite", cursive;
 }
 h4 {
+  font-family: "Sacramento", cursive;
+
   margin-bottom: 0.75rem;
   margin-top: 0.75rem;
+  color: rgb(237, 24, 141);
+  font-size: 2rem;
 }
 
 h2 {
@@ -38,20 +45,22 @@ h2 {
 .comment-count {
   border-style: solid;
   padding: 0.25rem;
-  background-color: yellow;
+  background-color: rgb(72, 232, 14);
   text-align: justify;
   margin: 0.25rem;
   height: 1.25rem;
 }
-
+.comment-count {
+  background-color: orange;
+}
 hr {
-  background-color: green;
-  border-color: green;
+  background-color: rgb(255, 0, 230);
+  border-color: rgb(255, 0, 230);
   width: 100%;
   height: 0.25rem;
 }
 .title {
-  color: rgb(79, 11, 142);
+  color: rgb(171, 21, 205);
 }
 
 .topic-button,
@@ -61,9 +70,18 @@ button {
   margin: 1rem;
   height: 3rem;
   font-size: 26px;
-  color: rgb(38, 57, 19);
+  color: rgb(39, 53, 24);
   border-radius: 50px;
-  background-color: aquamarine;
+  background-color: rgb(39, 227, 18);
+  font-family: "Special Elite", cursive;
+}
+a:hover {
+  color: rgb(11, 11, 236);
+  /* background-color: rgb(177, 15, 39); */
+}
+
+button:hover {
+  background-color: rgb(255, 0, 111);
 }
 .back {
   width: 8rem;
@@ -85,7 +103,7 @@ button:hover {
 
 .article-body {
   border-style: double;
-  border-color: rgb(228, 89, 15);
+  border-color: rgb(228, 15, 178);
   border-width: 0.5rem;
   padding: 2rem;
   font-size: 25px;
@@ -106,7 +124,9 @@ label {
   text-align: center;
   padding-left: 2rem;
   padding-right: 2rem;
-  border-color: rgb(21, 53, 195);
+  border-color: rgb(255, 0, 217);
+  border-style: groove;
+  border-width: 0.25rem;
 }
 
 .vote-position {
@@ -120,7 +140,7 @@ label {
   flex-direction: column;
   width: auto;
   border-style: solid;
-  border-color: blueviolet;
+  border-color: rgb(226, 43, 43);
   border-width: 0.25rem;
   margin: 0.5rem;
 }
