@@ -1,8 +1,9 @@
 # About The App
 
-Deployed App link - https://samachaarnews.netlify.app
+Deployed App link - https://samachaar-news.netlify.app
 
 Link to backend repository (API) - https://github.com/manitagupta15/samachaarNews
+
 Heroku Link - https://nc-news-samachaara.herokuapp.com/
 
 It makes requests to the back end hosted on Heroku to get data and manipulate it based on the request made.
@@ -12,15 +13,18 @@ Samachaar News has articles which are divided into topics. Each article has user
 
 ## Wire frames
 
-link to the planning of the app - https://www.figma.com/file/cDbZPEEZvi0xnx64CC9EYP/Untitled?node-id=5%3A239
+Link to the planning of the app - https://www.figma.com/file/cDbZPEEZvi0xnx64CC9EYP/Samachaar-News-FrontEnd?node-id=5%3A239
 
 During the designing of the app, decisions were made to change the look slightly to make the app more accessable and easy to use.
 
 ## Endpoints
 
 '/' -> Shows a list of all articles
+
 '/articles/:topic -> Shows articles that are :topic specific
+
 '/articles/articleId/:article_id' -> Shows the article details with that article_id
+
 '/users' -> Shows a list of users and can select specific users
 
 ## Installation
